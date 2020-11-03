@@ -1,0 +1,97 @@
+@charset "utf-8";
+// @import '_layer-animation';
+@import '../../config.less';
+.layer {
+    display: none;
+    position: fixed;
+    z-index: 1003;
+    overflow: hidden;
+    border-radius: 3px;
+    box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
+    background: #fff;
+    min-width: 200px;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    .layer-fullscreen {
+        display: block;
+        position: absolute;
+        right: 50px;
+        top: 14px;
+        z-index: 1002;
+        width: 32px;
+        .height(16px);
+        font-size: 16px;
+        color: #333333;
+        cursor: pointer;
+        user-select: none;
+        &:hover {
+            color: #333333;
+        }
+    }
+    .layer-close {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 14px;
+        z-index: 1002;
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        font-size: 16px;
+        color: #333333;
+        cursor: pointer;
+        user-select: none;
+        &:hover {
+            color: #333333;
+        }
+    }
+    .layer-header {
+        padding-left: 15px;
+        .height(40px);
+        overflow: hidden;
+        font-size: 16px;
+        color: #fff;
+        background: #2260c9;
+        cursor: pointer;
+    }
+    .layer-title {
+        margin-bottom: 30px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .layer-content {
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+    .layer-body {
+        padding: 20px;
+    }
+}
+@keyframes scalein {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0.5);
+        -ms-transform: scale(0.5);
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
+}
+.layer-animate {
+    -webkit-animation-name: scalein;
+    animation-name: scalein;
+}
+.layer-mask {
+    background: #000;
+    z-index: 1002;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    .opacity(30);
+}

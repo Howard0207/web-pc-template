@@ -1,0 +1,77 @@
+@import '../../config.less';
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 26px;
+    width: 440px;
+    height: 50px;
+    background: linear-gradient(225deg, #a693f2 0%, #3c6cf1 100%);
+    border-bottom-left-radius: 20px;
+    .header__company {
+        max-width: 150px;
+        cursor: pointer;
+        p {
+            .text-overflow();
+            &:first-child {
+                font-size: 16px;
+                color: @white;
+            }
+            &:last-child {
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.6);
+            }
+        }
+    }
+    .header__date {
+        color: @white;
+    }
+
+    .header__account {
+        display: flex;
+        align-items: center;
+        color: @white;
+        cursor: pointer;
+        img {
+            display: block;
+            margin-right: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            user-select: none;
+        }
+        p {
+            max-width: 80px;
+            .text-overflow();
+        }
+    }
+}
+.header__layer {
+    .header__layer-header {
+        padding: 10px 0 15px;
+        border-bottom: 1px solid @gray-border;
+        .layer-header__dropdown {
+            margin-right: 15px;
+        }
+    }
+    .layer-body {
+        min-height: 300px;
+    }
+    .ant-list {
+        max-height: 550px;
+        overflow-y: scroll;
+        margin: 0 -20px;
+        padding: 0 20px;
+        .ant-list-item-meta {
+            cursor: pointer;
+        }
+    }
+}
+.header__user-menu {
+    margin-top: 10px;
+    text-align: center;
+}
