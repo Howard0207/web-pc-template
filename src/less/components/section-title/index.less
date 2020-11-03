@@ -1,0 +1,26 @@
+@import '../../config.less';
+.section-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    &.section-title-link {
+        cursor: pointer;
+    }
+    .title-bar {
+        display: block;
+        margin-right: 5px;
+        width: 3px;
+        height: 14px;
+        border-radius: 2px;
+        background: @tab-active;
+    }
+    .title-text {
+        margin-right: 3px;
+        line-height: 1;
+    }
+    .icon-arrowLine {
+        line-height: 1;
+        font-size: 14px;
+        color: @tab-active;
+    }
+}
