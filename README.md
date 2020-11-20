@@ -1,5 +1,5 @@
 # template
-a webpack template
+qingke_template_web_pc
 ## 项目启动步骤
 
 -   Step one: 克隆项目到本地(clone project to local env)
