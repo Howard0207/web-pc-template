@@ -1,54 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { useLocation } from 'react-router';
 import { Menu } from 'antd';
-import Icon, { PictureOutlined, BranchesOutlined } from '@ant-design/icons';
+import { defaultMenu } from '_const';
 
 const { SubMenu } = Menu;
-const defaultMenu = [
-    {
-        name: '图库',
-        path: 'picture',
-        icon: PictureOutlined,
-        child: [
-            {
-                name: '相册',
-                path: '/',
-                child: [],
-            },
-            {
-                name: '图片压缩',
-                path: '/book',
-                child: [],
-            },
-        ],
-    },
-    {
-        name: '一次图',
-        path: '/primary-electrical-overview',
-        icon: BranchesOutlined,
-        child: [
-            {
-                name: '项目列表',
-                path: '/login',
-                child: [],
-            },
-        ],
-    },
-];
-function SiderMenu(props) {
-    const [menu, setMenu] = useState(defaultMenu);
+
+function SiderMenu() {
+    const [menu] = useState(defaultMenu);
+    const location = useLocation();
     const history = useHistory();
+    const { pathname } = location;
+
     const getMenu = (menuList) => {
         return menuList.map((item) => {
             if (item.child.length > 0) {
                 return (
-                    <SubMenu key={item.path} title={item.name} icon={<Icon component={item.icon} />}>
+                    <SubMenu key={item.path} title={item.name} className={item.className}>
                         {getMenu(item.child)}
                     </SubMenu>
                 );
             }
-            return <Menu.Item key={item.path}>{item.name}</Menu.Item>;
+            return (
+                <Menu.Item key={item.path}>
+                    <i className={item.className}></i>
+                    {item.name}
+                </Menu.Item>
+            );
         });
     };
 
@@ -58,13 +36,7 @@ function SiderMenu(props) {
 
     useEffect(() => {}, []);
     return (
-        <Menu
-            theme="dark"
-            onClick={handleMenuClick}
-            // defaultOpenKeys={["sub1"]}
-            // selectedKeys={[this.state.current]}
-            mode="inline"
-        >
+        <Menu theme="light" onClick={handleMenuClick} selectedKeys={[pathname]} mode="inline" className="main__menu">
             {getMenu(menu)}
         </Menu>
     );

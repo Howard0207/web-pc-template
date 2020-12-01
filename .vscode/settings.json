@@ -8,7 +8,7 @@
         "**/.git": true,
         "**/yarn.lock": true,
         "**/dist": true,
-        "**/build": true,
+        // "**/build": true,
         "**/webpack.config.js": true,
         "**/.babelrc": true,
         "**/node_modules": true,

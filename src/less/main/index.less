@@ -1,28 +1,123 @@
 @import '../config.less';
 .main {
     height: 100%;
-    .main__sider-logo {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0 15px;
-        height: 80px;
-        font-size: 20px;
-        color: @white;
-        cursor: pointer;
-        img {
-            margin-right: 10px;
-            width: 40px;
+    .main__sider {
+        background-color: @blue-light;
+        .ant-layout-sider-children {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+            overflow-y: auto;
+            .main__logo {
+                padding-bottom: 15px;
+                background: linear-gradient(316deg, #36efc3 0%, #0073f5 100%);
+                box-shadow: 0px 1px 6px #1fc9be;
+                text-align: center;
+                font-size: 16px;
+                color: #fff;
+                img {
+                    width: 100%;
+                }
+                p {
+                    margin: 0;
+                }
+            }
+            .copyright {
+                margin-top: 40px;
+                margin-bottom: 20px;
+                transform: scale(0.9);
+                text-align: center;
+                font-size: 12px;
+                font-weight: 500;
+                line-height: 18px;
+                color: @gray;
+            }
         }
-    }
-    .main__sider-logo--collapsed {
-        flex-wrap: wrap;
-        img {
-            margin-right: 0;
-            padding: 20px 0;
-        }
-        .main__sider-slogan {
-            display: none;
+        .main__menu {
+            background-color: @blue-light;
+            .ant-menu-item {
+                font-size: 16px;
+                &::after {
+                    left: 0;
+                    right: auto;
+                    border-width: 6px;
+                    border-color: @blue-dark;
+                }
+            }
+            &.ant-menu:not(.ant-menu-horizontal) {
+                .ant-menu-item-selected {
+                    color: @white;
+                    background: linear-gradient(316deg, #36efc3 0%, #0073f5 100%);
+                }
+            }
+            .ant-menu-item {
+                display: flex;
+                align-items: center;
+                .menu-icon {
+                    display: block;
+                    margin-right: 15px;
+                    width: 30px;
+                    height: 24px;
+                    background: url('../../static/imgs/sprite_icon.png');
+                }
+                .menu-index {
+                    background-position: 0px 0px;
+                }
+                .menu-alarm {
+                    background-position: -155px 2px;
+                }
+                .menu-safety {
+                    background-position: -42px 0px;
+                }
+                .menu-electricity {
+                    background-position: -82px 0px;
+                }
+                .menu-quality {
+                    background-position: -304px 0px;
+                }
+                .menu-statistics {
+                    background-position: -119px 0px;
+                }
+                .menu-fee {
+                    background-position: -191px 1px;
+                }
+                .menu-control {
+                    background-position: -230px 0px;
+                }
+                .menu-production {
+                    background-position: -267px 0px;
+                }
+                &.ant-menu-item-selected {
+                    .menu-index {
+                        background-position: 0px -23px;
+                    }
+                    .menu-alarm {
+                        background-position: -155px -23px;
+                    }
+                    .menu-safety {
+                        background-position: -42px -23px;
+                    }
+                    .menu-electricity {
+                        background-position: -82px -26px;
+                    }
+                    .menu-quality {
+                        background-position: -304px -23px;
+                    }
+                    .menu-statistics {
+                        background-position: -119px -25px;
+                    }
+                    .menu-fee {
+                        background-position: -191px -25px;
+                    }
+                    .menu-control {
+                        background-position: -230px -24px;
+                    }
+                    .menu-production {
+                        background-position: -267px -25px;
+                    }
+                }
+            }
         }
     }
     .main__header {

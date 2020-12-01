@@ -26,10 +26,6 @@ const webpackDev = {
                 target: 'https://www.dev.zhidianu.soejh.com',
                 changeOrigin: true,
             },
-            '/factory-common': {
-                target: 'localhost:8088',
-                changeOrigin: true,
-            },
         },
         before(app) {
             mock(app);
