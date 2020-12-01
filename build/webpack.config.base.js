@@ -3,12 +3,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const { getTemplates, getEntries, getCssHandler } = require('./webpack.config.util');
+const { getTemplates, getEntries, getCssHandler, ENV, publicPath, isDev } = require('./webpack.config.util');
 
-const ENV = process.env.NODE_ENV;
-const isDev = ENV === 'development';
-
-const cssHandler = getCssHandler(isDev);
+const cssHandler = getCssHandler();
 
 const entries = getEntries();
 
@@ -18,7 +15,8 @@ module.exports = {
     entry: entries,
     output: {
         path: path.resolve(__dirname, '../dist'),
-        publicPath: '/',
+        filename: isDev ? '[name].[hash].js' : '[name].[chunkhash].js',
+        publicPath,
     },
     module: {
         rules: [
@@ -37,7 +35,7 @@ module.exports = {
                     {
                         loader: 'url-loader',
                         options: {
-                            limit: 8912,
+                            limit: 10240,
                         },
                     },
                 ],
@@ -53,8 +51,8 @@ module.exports = {
         new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /^\.\/(zh-cn)$/),
         new webpack.ProvidePlugin({ React: 'react' }),
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
-            chunkFilename: 'css/[id].css',
+            filename: isDev ? '[name].css' : '[name].[contenthash].css',
+            chunkFilename: isDev ? '[id].css' : '[id].[contenthash].css',
             ignoreOrder: true,
         }),
         ...templates,

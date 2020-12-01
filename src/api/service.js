@@ -62,6 +62,6 @@ instance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-instance.CancelToken = Axios.CancelToken;
-instance.isCancel = Axios.isCancel;
+instance.CancelToken = axios.CancelToken;
+instance.isCancel = axios.isCancel;
 export default instance;

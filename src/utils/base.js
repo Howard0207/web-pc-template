@@ -195,18 +195,33 @@ export const removeEvent = myRemoveEvent();
  * @param {type: string, desc: script地址} url
  * @param {type: boolean, desc: true->插入到body最后, false->插入到head} injectBody
  */
-export function loadScript(url, injectBody = true) {
-    return new Promise((resolve) => {
-        const script = document.createElement('script');
-        script.onload = resolve;
-        script.src = url;
-        if (injectBody) {
-            document.body.appendChild(script);
-        } else {
-            document.head.appendChild(script);
+export const loadScript = (() => {
+    const scriptMap = {};
+    return (url, injectBody = true) => {
+        if (scriptMap[url]) {
+            return Promise.resolve(scriptMap[url]);
         }
-    });
-}
+        return new Promise((resolve, reject) => {
+            scriptMap[url] = 'loading';
+            const script = document.createElement('script');
+            script.onload = () => {
+                scriptMap[url] = 'loaded';
+                resolve(scriptMap[url]);
+            };
+            script.onerror = () => {
+                scriptMap[url] = null;
+                script.remove();
+                reject(scriptMap[url]);
+            };
+            script.src = url;
+            if (injectBody) {
+                document.body.appendChild(script);
+            } else {
+                document.head.appendChild(script);
+            }
+        });
+    };
+})();
 
 /**
  * 获取location链接上的query参数

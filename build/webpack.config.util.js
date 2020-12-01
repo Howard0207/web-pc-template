@@ -6,6 +6,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const chunksList = [];
 const entry = {};
 
+const ENV = process.env.NODE_ENV;
+const isDev = ENV === 'development';
+
+// cdn path config
+const publicPath = isDev ? '/' : '/';
+
 function getModulesList() {
     const moduleList = glob.sync(path.resolve(__dirname, '../src/entry/*'));
     for (let i = 0, len = moduleList.length; i < len; i++) {
@@ -15,8 +21,20 @@ function getModulesList() {
     }
 }
 
-const getCssHandler = (isDev) => {
-    return [isDev ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'];
+const getCssHandler = () => {
+    return [
+        isDev
+            ? 'style-loader'
+            : {
+                  loader: MiniCssExtractPlugin.loader,
+                  options: {
+                      publicPath: `${publicPath}`,
+                  },
+              },
+        'css-loader',
+        'postcss-loader',
+        'less-loader',
+    ];
 };
 
 const getTemplates = () => {
@@ -25,7 +43,7 @@ const getTemplates = () => {
         scriptLoading: 'defer',
         hash: true,
         inject: 'body',
-        favicon: path.resolve(__dirname, '../src/static/imgs/favicon.png'),
+        favicon: path.resolve(__dirname, '../src/static/imgs/favicon.ico'),
         minify: {
             html5: true,
             collapseWhitespace: true,
@@ -61,4 +79,7 @@ module.exports = {
     getEntries,
     getCssHandler,
     getTemplates,
+    publicPath,
+    ENV,
+    isDev,
 };
