@@ -5,7 +5,7 @@ import '_less/login';
 
 const Login = () => {
     const onFinish = () => {
-        alert('test');
+        window.location.replace('/');
     };
 
     return (
