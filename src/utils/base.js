@@ -87,6 +87,9 @@ export const EventHub = {
         }
     },
     off(event, fn) {
+        if (!this.events[event]) {
+            return;
+        }
         if (fn === undefined) {
             delete this.events[event];
         } else {

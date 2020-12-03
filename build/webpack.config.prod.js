@@ -48,28 +48,12 @@ const webpackProd = {
                     minSize: 0,
                     minChunks: 1,
                 },
-                charts: {
-                    name: 'echarts',
-                    chunks: 'all',
-                    priority: 10,
-                    test: /echarts|zrender/,
-                    minSize: 0,
-                    minChunks: 3,
-                },
                 antd: {
                     name: 'antd',
                     chunks: 'all',
                     priority: 15,
                     test: /antd|rc-picker|moment/,
                     minSize: 0,
-                    minChunks: 3,
-                },
-                xlsx: {
-                    name: 'xlsx',
-                    chunks: 'all',
-                    priority: 8,
-                    test: /xlsx/,
-                    minSize: 100,
                     minChunks: 3,
                 },
                 styles: {
