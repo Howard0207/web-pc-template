@@ -1,24 +1,12 @@
 {
-    "presets": [
+    "presets": ["@babel/preset-env", "@babel/preset-react"],
+    "plugins": [
         [
-            "@babel/preset-env",
+            "@babel/plugin-transform-runtime",
             {
-                "useBuiltIns": "entry",
-                "loose": true,
-                "corejs": {
-                    "version": 3, // 使用core-js@3
-                    "proposals": true
-                },
-                "targets": {
-                    "browsers": ["IE 10", "last 2 versions", "> 1%"]
-                },
-                "modules": false
+                "regenerator": true
             }
         ],
-        "@babel/preset-react"
-    ],
-    "plugins": [
-        ["@babel/plugin-transform-runtime"],
         [
             "import",
             {

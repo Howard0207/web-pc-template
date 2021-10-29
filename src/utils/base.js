@@ -226,6 +226,27 @@ export const loadScript = (() => {
     };
 })();
 
+export const loadCss = (() => {
+    return (url) => {
+        const link = document.createElement('link');
+        const oldLink = document.querySelector('#theme');
+        return new Promise((resolve, reject) => {
+            link.onload = () => {
+                oldLink.remove();
+                link.setAttribute('id', 'theme');
+                resolve(url);
+            };
+            link.onerror = () => {
+                link.remove();
+                reject(url);
+            };
+            link.setAttribute('rel', 'stylesheet');
+            link.setAttribute('href', url);
+            document.head.appendChild(link);
+        });
+    };
+})();
+
 /**
  * 获取location链接上的query参数
  * @param {type: string, desc: search字段} name

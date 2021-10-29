@@ -1,20 +1,25 @@
-import Loadable from 'react-loadable';
-import Loading from '_components/loading';
+import { withRouterLazy, ProjectLoading, RouteLoading } from '_components';
 
-const Main = Loadable({
-    loader: () => import(/* webpackPrefetch: true */ '../pages/main'),
-    loading: Loading('loadable-loading__app'),
-});
+const Main = withRouterLazy(
+    React.lazy(() =>
+        import(/* webpackPrefetch: true */ /* webpackChunkName: "Test" */ /* webpackMode: "lazy" */ '../pages/main')
+    ),
+    ProjectLoading
+);
 
-const NotFound = Loadable({
-    loader: () => import(/* webpackPrefetch: true */ '../pages/404'),
-    loading: Loading('loadable-loading__page'),
-});
+const NotFound = withRouterLazy(
+    React.lazy(() =>
+        import(/* webpackPrefetch: true */ /* webpackChunkName: "Test" */ /* webpackMode: "lazy" */ '../pages/404')
+    ),
+    ProjectLoading
+);
 
-const TestPage = Loadable({
-    loader: () => import(/* webpackPrefetch: true */ '../pages/test'),
-    loading: Loading('loadable-loading__page'),
-});
+const TestPage = withRouterLazy(
+    React.lazy(() =>
+        import(/* webpackPrefetch: true  */ /* webpackChunkName: "Test" */ /* webpackMode: "lazy" */ '../pages/test')
+    ),
+    RouteLoading
+);
 
 const routes = [
     {

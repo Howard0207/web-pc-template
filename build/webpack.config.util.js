@@ -21,6 +21,16 @@ function getModulesList() {
     }
 }
 
+function getThemeEntries() {
+    const themeEntries = {};
+    const moduleList = glob.sync(path.resolve(__dirname, '../src/theme/*.less'));
+    for (let i = 0, len = moduleList.length; i < len; i++) {
+        const moduleName = moduleList[i].split('/').slice(-1).join().split('.')[0];
+        themeEntries[moduleName] = path.resolve(__dirname, `../src/theme/${moduleName}.less`);
+    }
+    return themeEntries;
+}
+
 const getCssHandler = () => {
     return [
         isDev
@@ -31,6 +41,7 @@ const getCssHandler = () => {
                       publicPath: `${publicPath}`,
                   },
               },
+
         'css-loader',
         'postcss-loader',
         'less-loader',
@@ -79,6 +90,7 @@ module.exports = {
     getEntries,
     getCssHandler,
     getTemplates,
+    getThemeEntries,
     publicPath,
     ENV,
     isDev,

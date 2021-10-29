@@ -1,17 +1,17 @@
-import { setConfig } from 'react-hot-loader';
-import { hot } from 'react-hot-loader/root';
+// import { setConfig } from 'react-hot-loader';
+// import { hot } from 'react-hot-loader/root';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import { RouteWithSubRoutes } from '_components';
 import { Provider } from 'react-redux';
 import zhCN from 'antd/es/locale/zh_CN';
 import store from '../store';
-import 'core-js/stable';
+import 'core-js';
 import 'regenerator-runtime/runtime';
 import '_less/index.less';
 import routes from './router-config';
 
-setConfig({ showReactDomPatchNotification: false });
+// setConfig({ showReactDomPatchNotification: false });
 
 function RouterConfig() {
     return (
@@ -29,4 +29,4 @@ function RouterConfig() {
     );
 }
 
-export default hot(RouterConfig);
+export default RouterConfig;

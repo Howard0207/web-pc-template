@@ -2,7 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { getTemplates, getEntries, getCssHandler, ENV, publicPath, isDev } = require('./webpack.config.util');
 
 const cssHandler = getCssHandler();
@@ -18,24 +18,57 @@ module.exports = {
         filename: isDev ? '[name].[hash].js' : '[name].[chunkhash].js',
         publicPath,
     },
+    cache: {
+        // 将缓存类型设置为文件系统
+        type: 'filesystem',
+        buildDependencies: {
+            /* 将你的 config 添加为 buildDependency，以便在改变 config 时获得缓存无效*/
+            config: [__filename],
+            /* 如果有其他的东西被构建依赖， 你可以在这里添加它们*/
+            /* 注意，webpack.config，加载器和所有从你的配置中引用的模块都会被自动添加*/
+        },
+        // 指定缓存的版本
+        version: '1.0',
+    },
+
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
-                use: 'babel-loader',
+                use: [{ loader: 'babel-loader' }],
                 exclude: /node_modules/,
+            },
+            // {
+            //     test: /\.js$/,
+            //     loader: 'esbuild-loader',
+            //     exclude: /node_modules/,
+            //     options: {
+            //         loader: 'jsx', // Remove this if you're not using JSX
+            //         target: 'es2015', // Syntax to compile to (see options below for possible values)
+            //     },
+            // },
+
+            {
+                test: /\.m?js/,
+                resolve: {
+                    fullySpecified: false,
+                },
             },
             {
                 test: /\.(le|c)ss$/,
                 use: cssHandler,
             },
+
             {
                 test: /\.(png|jpg|jpeg|gif|svg)$/,
                 use: [
                     {
                         loader: 'url-loader',
                         options: {
-                            limit: 10240,
+                            limit: 8192,
+                            esModule: false,
+                            // outputPath: 'img/',
+                            name: '[name]-[hash:6].[ext]',
                         },
                     },
                 ],
@@ -56,8 +89,11 @@ module.exports = {
             ignoreOrder: true,
         }),
         ...templates,
-        new webpack.DefinePlugin({ 'process.env': `${JSON.stringify(ENV)}` }),
-        // new BundleAnalyzerPlugin(),
+        new webpack.DefinePlugin({
+            env: `${JSON.stringify(ENV)}`,
+            rand: Math.floor(Math.random() * 1000000),
+        }),
+        new BundleAnalyzerPlugin(),
     ],
     resolve: {
         alias: {
