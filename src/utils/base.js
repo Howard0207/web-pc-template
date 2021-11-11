@@ -67,6 +67,26 @@ export function percentPrecision(valueList, precision) {
     };
 }
 
+// 简单的节流函数
+export const throttle = (func, wait, mustRun) => {
+    let timeout;
+    let startTime = new Date();
+    return function cb(...rest) {
+        const context = this;
+        const args = rest;
+        const curTime = new Date();
+        // 如果达到了规定的触发时间间隔，触发handler
+        clearTimeout(timeout);
+        if (curTime - startTime >= mustRun) {
+            func.apply(context, args);
+            // 没达到触发间隔，重新设定定时器
+            startTime = curTime;
+        } else {
+            timeout = setTimeout(func, wait);
+        }
+    };
+};
+
 /**
  * 订阅发布
  */
@@ -330,3 +350,14 @@ export const downLoadXlsxData = (xlsxObj, dataJson, fileName, sheetNames) => {
     };
     xlsxObj.writeFile(workbook, `${fileName}.xls`); // 将数据写入文件
 };
+
+// 判断元素是否在可视范围内
+export function elementInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    // console.log('======================== start =============================');
+    // console.table(rect);
+    // console.log(window.innerHeight, document.documentElement.clientHeight);
+
+    // console.log('========================  end  =============================');
+    return rect.top >= 0 && rect.left >= 0 && rect.top <= (window.innerHeight || document.documentElement.clientHeight);
+}

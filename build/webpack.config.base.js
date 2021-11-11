@@ -38,16 +38,6 @@ module.exports = {
                 use: [{ loader: 'babel-loader' }],
                 exclude: /node_modules/,
             },
-            // {
-            //     test: /\.js$/,
-            //     loader: 'esbuild-loader',
-            //     exclude: /node_modules/,
-            //     options: {
-            //         loader: 'jsx', // Remove this if you're not using JSX
-            //         target: 'es2015', // Syntax to compile to (see options below for possible values)
-            //     },
-            // },
-
             {
                 test: /\.m?js/,
                 resolve: {
@@ -60,7 +50,7 @@ module.exports = {
             },
 
             {
-                test: /\.(png|jpg|jpeg|gif|svg)$/,
+                test: /\.(png|jpg|jpeg|gif|svg|jfif)$/,
                 use: [
                     {
                         loader: 'url-loader',
@@ -93,7 +83,7 @@ module.exports = {
             env: `${JSON.stringify(ENV)}`,
             rand: Math.floor(Math.random() * 1000000),
         }),
-        new BundleAnalyzerPlugin(),
+        // new BundleAnalyzerPlugin(),
     ],
     resolve: {
         alias: {

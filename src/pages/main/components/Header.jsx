@@ -135,8 +135,8 @@ function Header(props) {
      * didMount
      */
     useEffect(() => {
-        requestFactoryList();
-        requestUserInfo();
+        // requestFactoryList();
+        // requestUserInfo();
     }, []);
 
     useEffect(() => {

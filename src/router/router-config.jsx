@@ -1,8 +1,15 @@
 import { withRouterLazy, ProjectLoading, RouteLoading } from '_components';
 
+const MainDetail = withRouterLazy(
+    React.lazy(() => import(/* webpackPrefetch: true */ '../pages/main-detail')),
+    ProjectLoading
+);
+
 const Main = withRouterLazy(
     React.lazy(() =>
-        import(/* webpackPrefetch: true */ /* webpackChunkName: "Test" */ /* webpackMode: "lazy" */ '../pages/main')
+        import(
+            /* webpackPrefetch: true */ /* webpackChunkName: "Test" */ /* webpackMode: "lazy" */ '../pages/main-copy'
+        )
     ),
     ProjectLoading
 );
@@ -14,6 +21,11 @@ const NotFound = withRouterLazy(
     ProjectLoading
 );
 
+const ImageLazyLoad = withRouterLazy(
+    React.lazy(() => import(/* webpackPrefetch: true */ '../pages/image-lazy-load')),
+    RouteLoading
+);
+
 const TestPage = withRouterLazy(
     React.lazy(() =>
         import(/* webpackPrefetch: true  */ /* webpackChunkName: "Test" */ /* webpackMode: "lazy" */ '../pages/test')
@@ -21,7 +33,27 @@ const TestPage = withRouterLazy(
     RouteLoading
 );
 
+const CompareEffectApi = withRouterLazy(
+    React.lazy(() => import(/* webpackPrefetch: true */ '../pages/useEffect&useLayoutEffect')),
+    RouteLoading
+);
+
+const ImageUpload = withRouterLazy(
+    React.lazy(() => import(/* webpackPrefetch: true */ '../pages/upload-image')),
+    RouteLoading
+);
 const routes = [
+    {
+        path: '/detail',
+        component: MainDetail,
+        routes: [
+            {
+                path: '/detail/user-center',
+                exact: true,
+                component: NotFound,
+            },
+        ],
+    },
     {
         path: '/',
         component: Main,
@@ -30,6 +62,21 @@ const routes = [
                 path: '/',
                 exact: true,
                 component: TestPage,
+            },
+            {
+                path: '/imglazyload',
+                component: ImageLazyLoad,
+                exact: true,
+            },
+            {
+                path: '/imgupload',
+                component: ImageUpload,
+                exact: true,
+            },
+            {
+                path: '/compareeffectapi',
+                component: CompareEffectApi,
+                exact: true,
             },
             {
                 path: '*',

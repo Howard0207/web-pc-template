@@ -1,4 +1,4 @@
-import { elementInViewport } from '_utils';
+import { elementInViewport, throttle } from '_utils';
 import img1 from '_static/imgs/1.jfif';
 import img2 from '_static/imgs/2.jfif';
 import img3 from '_static/imgs/3.jfif';
@@ -29,28 +29,27 @@ class ImageLazyLoad extends React.Component {
 
     // 图片懒加载
     lazyLoadImgs = (images) => {
-        let count = 0;
         return () => {
-            [].slice.call(images).forEach((image) => {
+            images.forEach((image) => {
                 const style = image.getAttribute('style');
-                if (!style && elementInViewport(image)) {
-                    const url = image.getAttribute('data-src');
-                    const img = new Image();
-                    img.onload = () => {
-                        image.setAttribute('style', `background-image: url(${url})`);
-                        count++;
-                    };
-                    img.onerror = () => {
-                        // eslint-disable-next-line no-console
-                        console.log('%c 加载失败', 'color: #ff6262');
-                        count++;
-                    };
-                    img.src = url;
+                if (!style) {
+                    if (elementInViewport(image)) {
+                        const url = image.getAttribute('data-src');
+                        const img = new Image();
+                        img.onload = () => {
+                            image.setAttribute('style', `background-image: url(${url})`);
+                        };
+                        img.onerror = () => {
+                            // eslint-disable-next-line no-console
+                            console.log(`%c 加载失败:${url}`, 'color: #ff6262');
+                        };
+                        img.src = url;
+                    }
+                } else {
+                    const idx = images.findIndex((dom) => dom === image);
+                    images.splice(idx, 1);
                 }
             });
-            if (count >= images.length) {
-                this.removeScroll();
-            }
         };
     };
 
@@ -62,8 +61,8 @@ class ImageLazyLoad extends React.Component {
     // 初始化滚动事件
     initScroll = () => {
         const { can } = this.state;
-        const images = can.current.querySelectorAll('.img-lazy');
-        this.bindFunc = this.lazyLoadImgs(images);
+        const images = Array.from(can.current.querySelectorAll('.img-lazy'));
+        this.bindFunc = throttle(this.lazyLoadImgs(images), 50, 100);
         window.addEventListener('scroll', this.bindFunc);
         this.bindFunc();
     };
@@ -76,37 +75,31 @@ class ImageLazyLoad extends React.Component {
                     <div className="img-wrap">
                         <div className="img-lazy" data-src={img1}></div>
                     </div>
-                    {/* <img src={dimg} alt="" data-src={img1} /> */}
                 </div>
                 <div className="img-can">
                     <div className="img-wrap">
                         <div className="img-lazy" data-src={img2}></div>
                     </div>
-                    {/* <img src={dimg} alt="" data-src={img2} /> */}
                 </div>
                 <div className="img-can">
                     <div className="img-wrap">
                         <div className="img-lazy" data-src={img3}></div>
                     </div>
-                    {/* <img src={dimg} alt="" data-src={img3} /> */}
                 </div>
                 <div className="img-can">
                     <div className="img-wrap">
                         <div className="img-lazy" data-src={img4}></div>
                     </div>
-                    {/* <img src={dimg} alt="" data-src={img4} /> */}
                 </div>
                 <div className="img-can">
                     <div className="img-wrap">
                         <div className="img-lazy" data-src={img5}></div>
                     </div>
-                    {/* <img src={dimg} alt="" data-src={img5} /> */}
                 </div>
                 <div className="img-can">
                     <div className="img-wrap">
                         <div className="img-lazy" data-src={img6}></div>
                     </div>
-                    {/* <img src={dimg} alt="" data-src={img6} /> */}
                 </div>
             </div>
         );

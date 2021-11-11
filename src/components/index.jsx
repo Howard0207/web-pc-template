@@ -7,6 +7,7 @@ import EchartsForReact from './echarts-for-react';
 import ProjectLoading from './project-loading';
 import RouteLoading from './route-loading';
 import withRouterLazy from './with-router-lazy';
+import AvatarDropDown from './avatar-dropdown';
 export {
     Loading,
     SectionTitle,
@@ -17,4 +18,5 @@ export {
     ProjectLoading,
     RouteLoading,
     withRouterLazy,
+    AvatarDropDown,
 };
