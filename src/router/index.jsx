@@ -1,5 +1,6 @@
 // import { setConfig } from 'react-hot-loader';
 // import { hot } from 'react-hot-loader/root';
+import React from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import { RouteWithSubRoutes } from '_components';

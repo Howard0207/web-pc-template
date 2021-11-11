@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import '_less/components/section-title';
 import { useHistory } from 'react-router';

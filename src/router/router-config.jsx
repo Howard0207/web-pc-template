@@ -1,3 +1,4 @@
+import React from 'react';
 import { withRouterLazy, ProjectLoading, RouteLoading } from '_components';
 
 const MainDetail = withRouterLazy(
@@ -15,9 +16,7 @@ const Main = withRouterLazy(
 );
 
 const NotFound = withRouterLazy(
-    React.lazy(() =>
-        import(/* webpackPrefetch: true */ /* webpackChunkName: "Test" */ /* webpackMode: "lazy" */ '../pages/404')
-    ),
+    React.lazy(() => import(/* webpackPrefetch: true */ /* webpackChunkName: "NotFound" */ '../pages/404')),
     ProjectLoading
 );
 
@@ -27,8 +26,13 @@ const ImageLazyLoad = withRouterLazy(
 );
 
 const TestPage = withRouterLazy(
+    React.lazy(() => import(/* webpackPrefetch: true  */ /* webpackChunkName: "TestPage" */ '../pages/test')),
+    RouteLoading
+);
+
+const ImageLazyLoad = withRouterLazy(
     React.lazy(() =>
-        import(/* webpackPrefetch: true  */ /* webpackChunkName: "Test" */ /* webpackMode: "lazy" */ '../pages/test')
+        import(/* webpackPrefetch: true */ /* webpackChunkName: "ImageLazyLoad" */ '../pages/image-lazy-load')
     ),
     RouteLoading
 );
@@ -42,6 +46,13 @@ const ImageUpload = withRouterLazy(
     React.lazy(() => import(/* webpackPrefetch: true */ '../pages/upload-image')),
     RouteLoading
 );
+const MainDetail = withRouterLazy(
+    React.lazy(() =>
+        import(/* webpackPrefetch: true */ /* webpackChunkName: "MainDetail    " */ '../pages/main-detail')
+    ),
+    ProjectLoading
+);
+
 const routes = [
     {
         path: '/detail',

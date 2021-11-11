@@ -1,23 +1,33 @@
 import React, { PureComponent } from 'react';
 import { withRouter, Switch } from 'react-router-dom';
-import { Button, Checkbox, Layout } from 'antd';
-import { RouteWithSubRoutes } from '_components';
+import { Layout, Avatar, Dropdown } from 'antd';
+import { RouteWithSubRoutes, AvatarDropDown } from '_components';
 import PropType from 'prop-types';
 import defaultLogo from '_static/imgs/logo.png';
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import classNames from 'classnames';
+import SiderMenu from './components/SiderMenu';
 import { loadCss } from '_utils';
-import { SiderMenu, Header } from './components';
+
 import '_less/main';
 
-const { Content, Sider } = Layout;
+const { Content, Sider, Header } = Layout;
 
 class Main extends PureComponent {
     constructor(props) {
         super();
         this.state = {
             routes: props.routes,
-            theme: 'theme1',
+            collapsed: false,
         };
     }
+
+    toggle = () => {
+        const { collapsed } = this.state;
+        this.setState({
+            collapsed: !collapsed,
+        });
+    };
 
     changeTheme = (theme) => {
         switch (theme) {
@@ -40,36 +50,47 @@ class Main extends PureComponent {
     componentDidMount() {}
 
     render() {
-        const { routes, theme } = this.state;
+        const { routes, collapsed } = this.state;
         return (
             <Layout theme="light" className="main">
-                <Sider theme="light" width={256} collapsedWidth="0" className="main__sider">
+                <Sider
+                    theme="light"
+                    width={256}
+                    className="main__sider"
+                    collapsible
+                    collapsed={collapsed}
+                    trigger={null}
+                >
                     <div className="main__menu-container">
                         <div className="main__logo">
                             <img src={defaultLogo} alt="logo" />
-                            <p>X X X X 平 台</p>
                         </div>
                         <SiderMenu />
                     </div>
-                    <footer className="theme">
-                        <div>主题选择：</div>
-                        <div className="theme-options">
-                            <span className="geekblue" onClick={() => this.changeTheme('theme1')}>
-                                {theme === 'theme1' ? '√' : null}
-                            </span>
-                            <span className="green" onClick={() => this.changeTheme('theme2')}>
-                                {theme === 'theme2' ? '√' : null}
-                            </span>
-                        </div>
-                    </footer>
                     <div className="copyright">
                         <p>粤ICP备19005988号</p>
                         <p>Copyright © 2019-2020 清科优能</p>
                     </div>
                 </Sider>
                 <Layout className="site-layout">
-                    <Header />
-                    <Content style={{ margin: '24px 16px 0' }}>
+                    <Header className={classNames('main__header', { 'main__header--collapsed': collapsed })}>
+                        {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                            className: 'trigger',
+                            onClick: this.toggle,
+                        })}
+                        <Dropdown
+                            overlay={AvatarDropDown}
+                            placement="bottomCenter"
+                            trigger="click"
+                            overlayClassName="user-menu"
+                        >
+                            <Avatar
+                                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                size="large"
+                            />
+                        </Dropdown>
+                    </Header>
+                    <Content className={classNames('main__content', { 'main__content--collapsed': collapsed })}>
                         <Switch>
                             {routes.map((route) => {
                                 return <RouteWithSubRoutes key={route.path} {...route} />;
@@ -82,7 +103,7 @@ class Main extends PureComponent {
     }
 }
 
-// Main.propTypes = {
-//     routes: PropType.array.isRequired,
-// };
+Main.propTypes = {
+    routes: PropType.array.isRequired,
+};
 export default withRouter(Main);

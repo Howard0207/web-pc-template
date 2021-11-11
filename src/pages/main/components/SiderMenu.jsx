@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation, withRouter } from 'react-router-dom';
+import { useHistory, withRouter } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import { Menu } from 'antd';
 import { defaultMenu } from '_const';
 
@@ -11,8 +12,8 @@ function SiderMenu() {
     const history = useHistory();
     const { pathname } = location;
 
-    const getMenu = (menuList) => {
-        return menuList.map((item) => {
+    const getMenu = (menuList) =>
+        menuList.map((item) => {
             if (item.child.length > 0) {
                 return (
                     <SubMenu key={item.path} title={item.name} className={item.className}>
@@ -21,13 +22,11 @@ function SiderMenu() {
                 );
             }
             return (
-                <Menu.Item key={item.path}>
-                    <i className={item.className}></i>
-                    {item.name}
+                <Menu.Item key={item.path} icon={<i className={item.className}></i>}>
+                    <span>{item.name}</span>
                 </Menu.Item>
             );
         });
-    };
 
     const handleMenuClick = ({ key }) => {
         history.push(key);
@@ -35,7 +34,7 @@ function SiderMenu() {
 
     useEffect(() => {}, []);
     return (
-        <Menu theme="light" onClick={handleMenuClick} selectedKeys={[pathname]} mode="inline" className="main__menu">
+        <Menu theme="dark" onClick={handleMenuClick} selectedKeys={[pathname]} mode="inline" className="main__menu">
             {getMenu(menu)}
         </Menu>
     );

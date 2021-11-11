@@ -1,6 +1,6 @@
 /* eslint-disable no-multi-assign */
 /* eslint-disable no-bitwise */
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Loading } from './Loading';
 
 function RouteLoading() {

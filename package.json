@@ -51,6 +51,7 @@
         "babel-eslint": "^10.1.0",
         "babel-loader": "^8.2.3",
         "babel-plugin-import": "^1.13.3",
+        "chalk": "^4.1.2",
         "clean-webpack-plugin": "^4.0.0",
         "commitizen": "^4.2.4",
         "compression-webpack-plugin": "^9.0.0",

@@ -4,7 +4,8 @@ const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { getTemplates, getEntries, getCssHandler, ENV, publicPath, isDev } = require('./webpack.config.util');
-
+const chalk = require('chalk');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const cssHandler = getCssHandler();
 
 const entries = getEntries();
@@ -50,7 +51,7 @@ module.exports = {
             },
 
             {
-                test: /\.(png|jpg|jpeg|gif|svg|jfif)$/,
+                test: /\.(png|jpg|jpeg|gif|jfif|svg)$/,
                 use: [
                     {
                         loader: 'url-loader',
@@ -72,16 +73,15 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /^\.\/(zh-cn)$/),
-        new webpack.ProvidePlugin({ React: 'react' }),
         new MiniCssExtractPlugin({
             filename: isDev ? '[name].css' : '[name].[contenthash].css',
             chunkFilename: isDev ? '[id].css' : '[id].[contenthash].css',
             ignoreOrder: true,
         }),
         ...templates,
-        new webpack.DefinePlugin({
-            env: `${JSON.stringify(ENV)}`,
-            rand: Math.floor(Math.random() * 1000000),
+        new webpack.DefinePlugin({ env: `${JSON.stringify(ENV)}` }),
+        new ProgressBarPlugin({
+            format: `  :msg [:bar] ${chalk.green.bold(':percent')} (:elapsed s)`,
         }),
         // new BundleAnalyzerPlugin(),
     ],

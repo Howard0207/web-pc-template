@@ -25,6 +25,7 @@
  * 
  */
 // import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import '_less/components/photo-preview/index';

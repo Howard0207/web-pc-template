@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import '_less/components/layer';
@@ -271,18 +272,8 @@ class Layer extends React.Component {
     };
 
     render() {
-        const {
-            width,
-            height,
-            isFullScreen,
-            display,
-            left,
-            top,
-            contentHeight,
-            animation,
-            docEle,
-            isShowFullScreen,
-        } = this.state;
+        const { width, height, isFullScreen, display, left, top, contentHeight, animation, docEle, isShowFullScreen } =
+            this.state;
         const { children, overflow, className, id, title, move } = this.props;
         const style = {
             width,

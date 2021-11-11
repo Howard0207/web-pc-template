@@ -1,5 +1,5 @@
 import ErrorBoundary from '../error-boundary';
-
+import React from 'react';
 const { Suspense } = React;
 
 const withRouterLazy = (LazyComponent, LoadingComponent) =>

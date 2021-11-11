@@ -1,3 +1,4 @@
+import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { regexAccount } from '_const';
 import '_less/index.less';
