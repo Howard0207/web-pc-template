@@ -49,24 +49,26 @@ module.exports = {
                 test: /\.(le|c)ss$/,
                 use: cssHandler,
             },
-
             {
                 test: /\.(png|jpg|jpeg|gif|jfif|svg)$/,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 8192,
-                            esModule: false,
-                            // outputPath: 'img/',
-                            name: '[name]-[hash:6].[ext]',
-                        },
+                type: 'asset/resource',
+                //解析
+                parser: {
+                    //转base64的条件
+                    dataUrlCondition: {
+                        maxSize: 8 * 1024, // 25kb
                     },
-                ],
+                },
+                generator: {
+                    //与output.assetModuleFilename是相同的,这个写法引入的时候也会添加好这个路径
+                    filename: 'img/[name].[hash:6][ext]',
+                    //打包后对资源的引入，文件命名已经有/img了
+                    publicPath: '/',
+                },
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf|htc)$/,
-                use: 'file-loader',
+                type: 'asset/resource',
             },
         ],
     },

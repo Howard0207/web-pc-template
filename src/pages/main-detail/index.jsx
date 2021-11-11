@@ -5,7 +5,7 @@ import { RouteWithSubRoutes, AvatarDropDown } from '_components';
 import PropType from 'prop-types';
 import defaultLogo from '_static/imgs/logo.png';
 
-import '_less/main-copy';
+import '_less/main';
 
 const { Content, Header } = Layout;
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { elementInViewport, throttle } from '_utils';
 import img1 from '_static/imgs/1.jfif';
 import img2 from '_static/imgs/2.jfif';
