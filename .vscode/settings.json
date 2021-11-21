@@ -7,7 +7,7 @@
     "files.exclude": {
         "**/.git": true,
         "**/yarn.lock": true,
-        "**/dist": true,
+        // "**/dist": true,
         // "**/build": true,
         "**/webpack.config.js": true,
         // "**/.babelrc": true,
