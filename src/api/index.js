@@ -1,18 +1,12 @@
 import axios from './service';
 
 export const login = (requestParameters) => {
-    return axios
-        .post('/api/auth', requestParameters)
-        .then((res) => {
-            if (res.access_token) {
-                localStorage.setItem('zhidianu_token', `Bearer ${res.access_token}`);
-                localStorage.setItem('zhidianu_refresh_token', res.refresh_token);
-                localStorage.setItem('zhidianu_expireTime', +new Date() + 6 * 24 * 60 * 60 * 1000);
-            }
-        })
-        .catch((err) => {
-            return Promise.reject(err);
-        });
+    return axios.post('/account/login', requestParameters).then((res) => {
+        if (res.code === 200) {
+            localStorage.setItem('token', `Bearer ${res.data.token}`);
+        }
+        return Promise.reject(res);
+    });
 };
 
 // 获取用户信息

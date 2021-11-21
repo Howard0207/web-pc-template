@@ -29,9 +29,10 @@ const webpackDev = {
         compress: false,
         historyApiFallback: true,
         proxy: {
-            '/unify-api': {
-                target: 'https://www.dev.zhidianu.soejh.com',
+            '/server': {
+                target: 'http://localhost:10100/',
                 changeOrigin: true,
+                pathRewrite: { '^/server': '' },
             },
         },
         // before(app) {

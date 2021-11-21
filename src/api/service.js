@@ -6,7 +6,7 @@ import { TOKEN_REFRESH_TIME } from '_const';
 /**
  * 自定义实例默认值
  */
-const instance = axios.create({ timeout: 10000 }); // 请求超时
+const instance = axios.create({ timeout: 10000, baseURL: 'server' }); // 请求超时
 
 /**
  * 自动 更新token

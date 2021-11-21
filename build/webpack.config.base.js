@@ -72,7 +72,7 @@ module.exports = {
         new ProgressBarPlugin({
             format: `  :msg [:bar] ${chalk.green.bold(':percent')} (:elapsed s)`,
         }),
-        new BundleAnalyzerPlugin(),
+        // new BundleAnalyzerPlugin(),
     ],
     resolve: {
         alias: {

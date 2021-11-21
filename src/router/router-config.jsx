@@ -1,6 +1,11 @@
 import React from 'react';
 import { withRouterLazy, ProjectLoading, RouteLoading } from '_components';
 
+const Login = withRouterLazy(
+    React.lazy(() => import(/* webpackPrefetch: true */ /* webpackChunkName: "Loggin" */ '../pages/login')),
+    ProjectLoading
+);
+
 const Main = withRouterLazy(
     React.lazy(() =>
         import(/* webpackPrefetch: true */ /* webpackChunkName: "Test" */ /* webpackMode: "lazy" */ '../pages/main')
@@ -43,6 +48,11 @@ const MainDetail = withRouterLazy(
 
 const routes = [
     {
+        path: '/login',
+        exact: true,
+        component: Login,
+    },
+    {
         path: '/detail',
         component: MainDetail,
         routes: [
@@ -76,10 +86,6 @@ const routes = [
                 path: '/compareeffectapi',
                 component: CompareEffectApi,
                 exact: true,
-            },
-            {
-                path: '*',
-                component: NotFound,
             },
         ],
     },

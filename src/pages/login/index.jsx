@@ -1,12 +1,20 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { regexAccount } from '_const';
+import { login } from '_src/api';
+import { errorCapture } from '_utils';
 import '_less/index.less';
 import '_less/login';
 
 const Login = () => {
-    const onFinish = () => {
-        window.location.replace('/');
+    const onFinish = async () => {
+        // window.location.replace('/');
+        const [err, data] = await errorCapture(login);
+        if (err) {
+            console.log('请求失败');
+            return;
+        }
+        console.log(data);
     };
 
     return (

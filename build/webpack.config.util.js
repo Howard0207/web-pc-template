@@ -10,7 +10,7 @@ const ENV = process.env.NODE_ENV;
 const isDev = ENV === 'development';
 
 // cdn path config
-const publicPath = isDev ? '/' : './';
+const publicPath = isDev ? '/' : '/';
 
 function getModulesList() {
     const moduleList = glob.sync(path.resolve(__dirname, '../src/entry/*'));
