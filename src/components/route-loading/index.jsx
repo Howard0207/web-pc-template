@@ -7,10 +7,12 @@ function RouteLoading() {
     const canContaner = useRef();
     useEffect(() => {
         const loading = new Loading({ container: canContaner.current });
-        loading.init();
-        return () => loading.stop();
+        let timer = setTimeout(() => loading.init(), 200);
+        return () => {
+            clearTimeout(timer);
+            loading.stop();
+        };
     }, []);
-
     return <div ref={canContaner} className="route-loading"></div>;
 }
 
