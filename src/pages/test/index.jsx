@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Result } from 'antd';
 import { useHistory } from 'react-router-dom';
-import { ValidateSlide } from '_components';
+import { ValidateSlide, ValidateSlideBackend } from '_components';
 import { fetchTest } from '_src/api';
 import { errorCapture } from '_utils';
 
@@ -23,8 +23,8 @@ export default function () {
 
     return (
         <>
-            <ValidateSlide />
-            <img src="http://localhost:10100/validate/slide/1231" />
+            <ValidateSlideBackend />
+            {/* <img src="http://localhost:10100/validate/slide/1231" /> */}
             <Result
                 className="not-found"
                 status="404"

@@ -9,6 +9,7 @@ import RouteLoading from './route-loading';
 import withRouterLazy from './with-router-lazy';
 import AvatarDropDown from './avatar-dropdown';
 import ValidateSlide from './validate-slide';
+import ValidateSlideBackend from './validate-slide-backend';
 export {
     Loading,
     SectionTitle,
@@ -21,4 +22,5 @@ export {
     withRouterLazy,
     AvatarDropDown,
     ValidateSlide,
+    ValidateSlideBackend,
 };

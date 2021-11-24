@@ -10,6 +10,16 @@ export const login = (requestParameters) => {
     });
 };
 
+// 滑块验证码
+export const verifySlideCode = (params) => {
+    return axios.post('/validate/slidematch', params).then((res) => {
+        if (res.code === 200) {
+            return res.data;
+        }
+        return Promise.reject(res);
+    });
+};
+
 // 获取用户信息
 export const fetchAccountInfo = () => {
     return axios.get('/api/example/user-info').then((res) => {
