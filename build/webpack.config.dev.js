@@ -23,7 +23,7 @@ const webpackDev = {
     },
     devServer: {
         static: '../dist',
-        port: '8082',
+        port: '8899',
         host: '0.0.0.0',
         hot: true,
         compress: false,

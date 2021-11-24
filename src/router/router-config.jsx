@@ -8,40 +8,74 @@ const Login = withRouterLazy(
 
 const Main = withRouterLazy(
     React.lazy(() =>
-        import(/* webpackPrefetch: true */ /* webpackChunkName: "Test" */ /* webpackMode: "lazy" */ '../pages/main')
+        import(
+            /* webpackPrefetch: true */
+            /* webpackChunkName: "Test" */
+            '../pages/main'
+        )
     ),
     ProjectLoading
 );
 
 const NotFound = withRouterLazy(
-    React.lazy(() => import(/* webpackPrefetch: true */ /* webpackChunkName: "NotFound" */ '../pages/404')),
+    React.lazy(() =>
+        import(
+            /* webpackPrefetch: true */
+            /* webpackChunkName: "NotFound" */
+            '../pages/404'
+        )
+    ),
     ProjectLoading
 );
 
 const TestPage = withRouterLazy(
-    React.lazy(() => import(/* webpackPrefetch: true  */ /* webpackChunkName: "TestPage" */ '../pages/test')),
+    React.lazy(() =>
+        import(
+            /* webpackPrefetch: true */
+            /* webpackChunkName: "TestPage" */
+            '../pages/test'
+        )
+    ),
     RouteLoading
 );
 
 const ImageLazyLoad = withRouterLazy(
     React.lazy(() =>
-        import(/* webpackPrefetch: true */ /* webpackChunkName: "ImageLazyLoad" */ '../pages/image-lazy-load')
+        import(
+            /* webpackPrefetch: true */
+            /* webpackChunkName: "ImageLazyLoad" */
+            '../pages/image-lazy-load'
+        )
     ),
     RouteLoading
 );
 
 const CompareEffectApi = withRouterLazy(
-    React.lazy(() => import(/* webpackPrefetch: true */ '../pages/useEffect&useLayoutEffect')),
+    React.lazy(() =>
+        import(
+            /* webpackPrefetch: true */
+            '../pages/useEffect&useLayoutEffect'
+        )
+    ),
     RouteLoading
 );
 
 const ImageUpload = withRouterLazy(
-    React.lazy(() => import(/* webpackPrefetch: true */ '../pages/upload-image')),
+    React.lazy(() =>
+        import(
+            /* webpackPrefetch: true */
+            '../pages/upload-image'
+        )
+    ),
     RouteLoading
 );
 const MainDetail = withRouterLazy(
     React.lazy(() =>
-        import(/* webpackPrefetch: true */ /* webpackChunkName: "MainDetail    " */ '../pages/main-detail')
+        import(
+            /* webpackPrefetch: true */
+            /* webpackChunkName: "MainDetail" */
+            '../pages/main-detail'
+        )
     ),
     ProjectLoading
 );

@@ -15,6 +15,16 @@
                 "style": "css"
             }
         ],
+        [
+            "import", // 使用 babel-plugin-import
+            {
+                "libraryName": "hcomp",
+                "libraryDirectory": "dist/es/components",
+                "camel2DashComponentName": false,
+                "style": true
+            },
+            "rollup-ui"
+        ],
         "@babel/plugin-proposal-class-properties",
         "react-hot-loader/babel"
     ]

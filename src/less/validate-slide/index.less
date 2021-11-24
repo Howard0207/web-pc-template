@@ -1,0 +1,63 @@
+.validate-slide {
+    position: relative;
+    width: 300px;
+    user-select: none;
+    canvas:nth-child(2) {
+        position: absolute;
+        left: 0;
+    }
+    .slide-container {
+        position: relative;
+        height: 40px;
+        line-height: 38px;
+        border: 1px solid #ccc;
+        text-align: center;
+        .slide-block {
+            position: absolute;
+            top: -1px;
+            z-index: 1;
+            border: 1px solid rgb(104, 180, 255);
+            background-color: rgb(137, 202, 255);
+            width: 56px;
+            height: 40px;
+            user-select: none;
+            &::after {
+                content: '滑块';
+                position: absolute;
+                right: 0;
+                width: 56px;
+                height: 38px;
+                line-height: 40px;
+                color: #fff;
+                text-align: center;
+                cursor: pointer;
+                background-color: rgb(32, 154, 255);
+            }
+            &.sliderContainer_success {
+                border-color: #52ccba;
+                background-color: #d2f4ef;
+                &::after {
+                    background-color: #52ccba;
+                }
+            }
+            &.sliderContainer_fail {
+                border-color: #ff8080;
+                background-color: #ffdada;
+                &::after {
+                    background-color: #ff8080;
+                }
+            }
+        }
+    }
+    .icon-reset {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+        line-height: 20px;
+        color: #fff;
+        cursor: pointer;
+    }
+}

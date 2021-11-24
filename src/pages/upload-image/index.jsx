@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Button, Upload, Progress, Empty } from 'antd';
+import { Button, Upload, Progress, Empty, message } from 'antd';
 import { UploadOutlined, PlayCircleOutlined, PauseCircleOutlined, RedoOutlined } from '@ant-design/icons';
 import QueueAnim from 'rc-queue-anim';
-import axios from 'axios';
+import axios from '_src/api/service.js';
 import '_less/compress';
 
 const CancelToken = axios.CancelToken;
@@ -132,7 +132,7 @@ class Compress extends PureComponent {
         const formData = new FormData();
         formData.append('fileIndex', cur);
         formData.append('file', chunkData[cur].chunk);
-        formData.append('token', token);
+        formData.append('fileToken', token);
         return { formData, token, ext };
     };
 
@@ -161,15 +161,16 @@ class Compress extends PureComponent {
                             if (!data) data = 0;
                             totalLoaded += data;
                         }
-                        data.uploadProgress = parseInt((totalLoaded / file.size) * 100);
-                        if (data.updateProgress > 100) data.updateProgress = 100;
+                        data.uploadProgress = Math.ceil((totalLoaded / file.size) * 100);
+                        if (data.updateProgress >= 100) data.updateProgress = 100;
                         this.updateProgress();
                     },
                 })
                 .then((res) => {
+                    console.log(res);
                     this.releaseRequest(source);
                     this.releaseFileInfoThread(threads, source);
-                    if (res.data.status === 200) {
+                    if (res.code === 200) {
                         uploadChunkStatus[cur] = 'uploaded';
                         return res.data;
                     }
@@ -194,15 +195,21 @@ class Compress extends PureComponent {
                 if (!findResult) {
                     const idx = uploadQueue.findIndex((item) => item === file);
                     uploadQueue.splice(idx, 1);
-                    axios.post('/upload/picture', { type: 'merge', count: chunkData.length, token, ext }).then(() => {
-                        file.status = fileStatus.success;
-                        this.updateProgress();
-                        this.setState({ uploadQueue }, () => {
-                            if (request.length < threads) {
-                                this.upload();
+                    axios
+                        .post('/upload/picture', { type: 'merge', count: chunkData.length, fileToken: token, ext })
+                        .then((res) => {
+                            if (res.code === 200) {
+                                file.status = fileStatus.success;
+                                this.updateProgress();
+                            } else {
+                                message.error('文件上传失败');
                             }
+                            this.setState({ uploadQueue }, () => {
+                                if (request.length < threads) {
+                                    this.upload();
+                                }
+                            });
                         });
-                    });
                 }
             }
         });

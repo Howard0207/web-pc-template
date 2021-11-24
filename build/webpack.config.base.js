@@ -19,7 +19,6 @@ module.exports = {
         filename: isDev ? '[name].[hash].js' : '[name].[chunkhash].js',
         publicPath,
     },
-
     module: {
         rules: [
             {
@@ -39,7 +38,7 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|jpeg|gif|jfif|svg)$/,
-                type: 'asset/resource',
+                type: 'asset',
                 //解析
                 parser: {
                     //转base64的条件
@@ -84,6 +83,7 @@ module.exports = {
             _src: path.resolve(__dirname, '../src'),
             _service: path.resolve(__dirname, '../src/service'),
             _store: path.resolve(__dirname, '../src/store'),
+            react: path.resolve('./node_modules/react'),
         },
         extensions: ['.jsx', '.js', '.less', '.css'],
     },

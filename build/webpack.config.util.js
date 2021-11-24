@@ -41,7 +41,6 @@ const getCssHandler = () => {
                       publicPath: `${publicPath}`,
                   },
               },
-
         'css-loader',
         'postcss-loader',
         'less-loader',

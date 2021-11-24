@@ -42,17 +42,17 @@ const webpackProd = {
 
         splitChunks: {
             chunks: 'all',
-            minSize: 30000,
+            minSize: 50000,
             maxSize: 245000,
-            minChunks: 3,
-            maxAsyncRequests: 6,
-            maxInitialRequests: 5,
+            minChunks: 1,
+            maxAsyncRequests: 20,
+            maxInitialRequests: 10,
             automaticNameDelimiter: '_',
-            enforceSizeThreshold: 245000,
+            enforceSizeThreshold: 300000,
             cacheGroups: {
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
-                    priority: -10,
+                    priority: 10,
                     name: false,
                     reuseExistingChunk: true,
                 },

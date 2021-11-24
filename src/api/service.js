@@ -25,7 +25,7 @@ instance.interceptors.request.use(
         const extendConfig = config;
         // 在发送请求之前做些什么（这里写展示loading的逻辑代码 ）
         // 获取token，配置请求头
-        const TOKEN = localStorage.getItem('zhidianu_token');
+        const TOKEN = localStorage.getItem('token');
         // const expireTime = localStorage.getItem('zhidianu_expireTime');
         // const curTime = +new Date();
         if (TOKEN) {

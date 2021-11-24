@@ -14,6 +14,12 @@
         "theme": "cross-env webpack --config ./build/webpack.theme.build.js",
         "commit": "npx git-cz"
     },
+    "sideEffects": [
+        "dist/*",
+        "es/**/style/*",
+        "lib/**/style/*",
+        "*.less"
+    ],
     "dependencies": {
         "@ant-design/icons": "^4.7.0",
         "@babel/runtime": "7.15.4",
