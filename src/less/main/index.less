@@ -136,11 +136,18 @@
         }
     }
     .main__content {
+        position: relative;
         margin-top: 88px;
         padding: 0 24px 24px 280px;
         transition: all 0.2s;
+        .route-loading {
+            left: 256px;
+        }
         &.main__content--collapsed {
             padding: 0 24px 24px 104px;
+            .route-loading {
+                left: 80px;
+            }
         }
         &.main__content--full-fill {
             padding: 0 24px 24px;
