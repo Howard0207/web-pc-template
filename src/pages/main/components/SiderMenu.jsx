@@ -12,17 +12,22 @@ function SiderMenu() {
     const history = useHistory();
     const { pathname } = location;
 
-    const getMenu = (menuList) =>
+    const getMenu = (menuList, isChild) =>
         menuList.map((item) => {
             if (item.child.length > 0) {
                 return (
-                    <SubMenu key={item.path} title={item.name} className={item.className}>
+                    <SubMenu
+                        key={item.path}
+                        title={item.name}
+                        className={item.className}
+                        icon={isChild ? null : item.icon}
+                    >
                         {getMenu(item.child)}
                     </SubMenu>
                 );
             }
             return (
-                <Menu.Item key={item.path} icon={<i className={item.className}></i>}>
+                <Menu.Item key={item.path} icon={isChild ? null : item.icon}>
                     <span>{item.name}</span>
                 </Menu.Item>
             );

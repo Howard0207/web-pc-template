@@ -68,9 +68,7 @@ module.exports = {
         }),
         ...templates,
         new webpack.DefinePlugin({ env: `${JSON.stringify(ENV)}` }),
-        new ProgressBarPlugin({
-            format: `  :msg [:bar] ${chalk.green.bold(':percent')} (:elapsed s)`,
-        }),
+        new ProgressBarPlugin({ format: `  :msg [:bar] ${chalk.green.bold(':percent')} (:elapsed s)` }),
         // new BundleAnalyzerPlugin(),
     ],
     resolve: {

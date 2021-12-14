@@ -37,14 +37,6 @@
         .main__menu {
             background-color: transparent;
             border: none !important;
-            .ant-menu-item {
-                font-size: 16px;
-                &::after {
-                    right: 0;
-                    border-width: 6px;
-                    border-color: #4690ff;
-                }
-            }
             &.ant-menu:not(.ant-menu-horizontal) {
                 .ant-menu-item-selected {
                     color: @white;
@@ -52,34 +44,9 @@
                 }
             }
             .ant-menu-item {
-                display: flex;
-                align-items: center;
-                color: @white;
-                .menu-icon {
-                    display: block;
-                    margin-right: 10px;
-                    width: 30px;
-                    font-size: 22px;
-                    text-align: center;
-                    transform: translate(-4px, 1px);
-                }
-                .icon-user {
-                    font-size: 24px;
-                }
-                .icon-computer {
-                    font-size: 18px;
-                }
-                span {
-                    opacity: 1;
-                    transition: opacity 0.3s ease;
-                }
-            }
-            &.ant-menu-inline-collapsed .ant-menu-item {
-                &::after {
-                    display: none;
-                }
-                span {
-                    opacity: 0;
+                font-size: 16px;
+                .ant-menu-item-icon {
+                    font-size: 20px;
                 }
             }
         }

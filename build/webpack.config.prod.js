@@ -14,9 +14,7 @@ const webpackProd = {
                 parallel: true,
                 extractComments: false,
                 terserOptions: {
-                    parse: {
-                        ecma: 8,
-                    },
+                    parse: { ecma: 8 },
                     compress: {
                         ecma: 5,
                         warnings: false,
@@ -26,14 +24,8 @@ const webpackProd = {
                         drop_debugger: true,
                         drop_console: true,
                     },
-                    mangle: {
-                        safari10: true,
-                    },
-                    output: {
-                        ecma: 5,
-                        comments: false,
-                        ascii_only: true,
-                    },
+                    mangle: { safari10: true },
+                    output: { ecma: 5, comments: false, ascii_only: true },
                 },
                 exclude: /\/node_modules/,
             }),
